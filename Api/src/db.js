@@ -7,6 +7,7 @@ const {
 } = process.env;
 
 
+
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/challenge`, {
   logging: false, 
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
@@ -31,8 +32,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-// const { Country , Activities  } = sequelize.models;
-// getCountries(Country)  // Cargo la Base de datos de paises desde la API
+ const { InOut, Users  } = sequelize.models;
+
+ Users.belongsToMany(InOut , { through: 'Usermoves'});
 
 // Country.belongsToMany(Activities , {through : 'CountryActivities'}); //relaciono ambas tablas con una intermedia
 // Activities.belongsToMany(Country , {through : 'CountryActivities'}); //relaciono ambas tablas con una intermedia

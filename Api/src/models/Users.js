@@ -3,24 +3,28 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('InOut', {
+  sequelize.define('Users', {
     id : {
       type: DataTypes.STRING,
       primaryKey: true
     },
-    concept: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    mount: {
-      type: DataTypes.INTEGER,
+    password: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    date: {
-      type: DataTypes.DATE,
+    lastname: {
+      type: DataTypes.STRING,
       allowNull: false,
     },
-    type: {
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    photo: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,6 +32,3 @@ module.exports = (sequelize) => {
     timestamps : false,
   });
 };
-
-
-
