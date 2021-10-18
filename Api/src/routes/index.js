@@ -1,11 +1,11 @@
 const { Router } = require('express');
 
-const moves = require('./moves.js');
+const users = require('./User.js');
 
 
 const router = Router();
 
-router.use('/moves' , moves)
+router.use('/users' , users)
 
 
 
