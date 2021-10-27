@@ -3,12 +3,12 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('InOut', {
+  sequelize.define('Moves', {
     id : {
       type: DataTypes.STRING,
       primaryKey: true
     },
-    concept: {
+    name: {
       type: DataTypes.STRING,
       allowNull: false,
     },
@@ -28,6 +28,3 @@ module.exports = (sequelize) => {
     timestamps : false,
   });
 };
-
-
-
