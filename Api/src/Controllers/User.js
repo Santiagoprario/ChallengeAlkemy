@@ -1,4 +1,4 @@
-const { Users }  = require("../db.js");
+const { Users , Moves}  = require("../db.js");
 const jwt = require('jsonwebtoken');
 
 
@@ -24,15 +24,18 @@ module.exports = {
 
   
   userLogin: async (req, res) => {
-
     //Recibe las argumentos por query ---> req.query
     var { email, password } = req.query;
 
     var users = await Users.findAll({
       where: {
         email: email
+      },
+      include: {
+        model: Moves,
       }
     });
+    console.log(users)
     if (users.length === 0) return res.status(200).json(
       {
         message: "El correo ingresado no existe.",
@@ -41,21 +44,16 @@ module.exports = {
     )
     try {
       if (users.length > 0) {
-        var user = users.filter(u => u.password === passwordInput);
+        var user = users.filter(u => u.password === password);
         if (user.length === 0) return res.status(200).json({ message: "Los datos ingresados son incorrectos", login: false })
         if (user.length > 1) return res.status(200).json({ message: "Error! Hay más de un usuario con ese mail y contraseña", login: false })
-
-        //token autentication - Se crea el token y se envia al cliente
-        const token = jwt.sign({ idUser: user[0].idUser }, req.app.get('secretKey'), { expiresIn: '7d' });
         var resp = {
           username: user[0].name,
-          id: user[0].idUser,
+          id: user[0].id,
+          moves : user[0].Moves,
           login: true,
-          token: token,
           message: "Autenticacion exitosa!"
         }
-        console.log("resp sent")
-        console.log(resp)
         return res.status(200).json(resp)
       }
       console.log(error);

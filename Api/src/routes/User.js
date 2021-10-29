@@ -9,29 +9,22 @@ const { createNewUser , userLogin , allUsers} = require('../Controllers/User')
 const router = Router();
 
 router.get('/' , allUsers)
-
-
-
 // Ruta para login 
 router.get('/login', userLogin)
-
 // Ruta creacion de nuevo Usuario
 router.post('/' , createNewUser)
-
-
-
-
-router.get('/:id/moves' , async (req, res) => {
-    
-    let { id } = req.params;
+// Ruta para actualizar movimientos 
+router.get('/moves' , async (req, res) => {
+    let { id } = req.query;
     let moves = await Users.findAll ({
-             where: { idUser: id },
+             where: { id: id },
+             include: {
+                model: Moves,
+              }
             })
         return res.json(moves)
 })
-
-
-
+//Ruta para registro de movimientos
 router.post('/moves', async (req, res) => {
     const succes = true;
     const { name, mount, date, type, idUser } = req.body;
@@ -40,10 +33,8 @@ router.post('/moves', async (req, res) => {
       mount,
       date,
       type,
-      idUser
     });
     try {
-  
           let userFound = await Users.findByPk(idUser)
           console.log(userFound)
           await userFound.addMoves(moveCreated);
@@ -53,6 +44,7 @@ router.post('/moves', async (req, res) => {
       res.sendStatus(500);
     }
   });
+  // Ruta para modificacion de movimientos
 
 
 
