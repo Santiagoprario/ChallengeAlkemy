@@ -1,0 +1,32 @@
+.container {
+    display: block;
+    justify-content: center;
+    
+    flex-direction: column;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    width: 300px;
+    font-size: 20px;
+    margin-left: 25%;
+}
+
+.title {
+    font-size: 25px;
+} 
+
+.input {
+    height: 35px;
+    margin-top: 2%;
+}
+
+.button {
+    margin-top: 5%;
+    height: 10%;
+    width: 300px;
+    border-radius: 30px;
+
+}
