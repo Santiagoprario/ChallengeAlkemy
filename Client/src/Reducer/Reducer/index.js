@@ -1,4 +1,4 @@
-import { LOG_OUT, LOG_IN , GET_MOVES, POST_MOVES} from '../Actions/index';
+import { LOG_OUT, LOG_IN , GET_MOVES, POST_MOVES , UPDATE_MOVES} from '../Actions/index';
 
 const INITIAL_STATE = {
   isAuth: false,
@@ -11,6 +11,10 @@ const Reducer = (state = INITIAL_STATE, { type, payload }) => {
   switch (type) {
     case LOG_IN:
       if (payload.login) {
+        window.localStorage.clear();
+        window.localStorage.setItem("isAuth" , payload.login)
+        window.localStorage.setItem('idUser', payload.id);
+        window.localStorage.setItem('name' , payload.username)
         return {
           ...state,
           isAuth: payload.login,
@@ -27,24 +31,29 @@ const Reducer = (state = INITIAL_STATE, { type, payload }) => {
         return newState
       };
     case LOG_OUT:
-      window.localStorage.removeItem("isAuth");
-      window.localStorage.removeItem("name");
-      window.localStorage.removeItem("idUser");
+      window.localStorage.clear();
+      window.localStorage.removeItem('isAuth');
+      window.localStorage.removeItem('name');
+      window.localStorage.removeItem('idUser');
           return {
             ...state,
             isAuth: false,
-            user: null,
+            name: null,
             id: null,
-            isAdmin: false,
-            status: ""
       };
       case GET_MOVES:
           return {
               ...state,
-              moves: payload.moves,
+              moves: payload.Moves,
           };
       case POST_MOVES:
-          return state;    
+              return {
+                ...state,
+          isAuth: payload.login,
+          name: payload.username,
+          idUser: payload.id,
+          moves: payload.Moves,
+            };  
       default:
           return state;
   };
