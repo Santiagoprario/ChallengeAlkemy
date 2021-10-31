@@ -1,0 +1,30 @@
+.moves {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    list-style:none;
+    
+}
+.list {
+    width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    list-style:none;
+    border: 2px solid black;
+    
+}
+.name {
+ width: 125px;
+ border: 1px solid black;
+}
+
+.mount {
+  width: 125px;
+}
+.date {
+    width: 125px;
+}
+.type {
+    width: 125px;
+}

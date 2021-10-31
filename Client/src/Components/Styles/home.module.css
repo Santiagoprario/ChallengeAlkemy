@@ -8,9 +8,9 @@
 .title {
     display: flex;
     justify-self: left ;
-    margin-top: 5%;
     font-size: 30px;
     margin-left: 5%;
+    padding-top: 1%;
 }
 
 .moves {
@@ -51,4 +51,17 @@
 
 .balance {
     font-size: 40px;
+}
+
+.nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.close {
+   height: 60px;
+   width: 60px;
+   border-radius: 50%;
 }

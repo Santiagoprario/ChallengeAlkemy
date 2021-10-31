@@ -3,7 +3,8 @@ import axios from "axios";
 export const LOG_OUT = 'LOG_OUT'; 
 export const LOG_IN = 'LOG_IN';
 export const GET_MOVES = 'GET_MOVES';
-export const POST_MOVES = 'POST_MOVES'
+export const POST_MOVES = 'POST_MOVES';
+export const UPDATE_MOVES = 'UPDATE_MOVES'
 
 export const logIn = ({email, password}) => {
     return function(dispatch) {
@@ -16,12 +17,25 @@ export const logIn = ({email, password}) => {
     };
   }; 
 
-export const getMoves = (idUser) => {
+  export const updateMoves = (id) => {
     return function(dispatch) {
-      return axios(`http://localhost:3001/users/moves?idUser=${idUser}`)
+      return axios(`http://localhost:3001/users/${id}/moves`)
         .then(response => {
           console.log(response)
-          dispatch({ type: GET_MOVES, payload: response.data });
+          dispatch({ type: UPDATE_MOVES, payload: response.data });
+        })
+        .catch(error => console.log(error));
+    };
+  }; 
+
+export const getMoves = (idUser) => {
+    return function() {
+      return axios(`http://localhost:3001/users/moves?idUser=${idUser}`)
+        .then(response => {
+          // console.log(response.data.Moves)
+          let moves = response.data.Moves;
+          console.log(moves)
+          return moves;
         })
         .catch(error => console.log(error));
     };
@@ -39,4 +53,10 @@ export const postMoves = ({ name , mount , date  } , title , idUser) => {
       .catch(error => console.log(error));
 }
 } 
+
+export const logOut = () => {
+  return function(dispatch) {
+    dispatch({type: LOG_OUT});
+  };
+};
 

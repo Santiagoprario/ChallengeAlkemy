@@ -13,11 +13,12 @@ function Form({option }) {
     })
     
 
-    const idUser = useSelector(state => state.id)
+    const idUser = localStorage.getItem('idUser');
     const title = option
 
     const handlesubmit = function () {
-      dispatch(postMoves(state,title,idUser))
+      dispatch(postMoves(state,title,idUser));
+      dispatch(getMoves(idUser));
     }
 
    const handleInputChange = function(e) {
